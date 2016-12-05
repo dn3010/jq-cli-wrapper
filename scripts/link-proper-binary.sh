@@ -6,6 +6,7 @@ if [[ $(uname) =~ ^Darwin ]]; then
     ln -s jq-osx-amd64 jq
 else
     if [[ $(uname) == MINGW* ]]; then
+        rm -f jq
         ln -s jq-win32.exe jq
     else
         if [[ $(uname -m) =~ i686 ]]; then
