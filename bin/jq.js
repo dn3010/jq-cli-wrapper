@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 var path = require('path');
-var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 
 var file;
 switch(process.platform) {
@@ -13,7 +15,12 @@ switch(process.platform) {
     throw new Error('platform not supported: ' + process.platform);
 }
 
-execFileSync(
-  path.join(__dirname, '..', 'jq-releases', file),
-  process.argv.slice(2)
+jq = spawn(
+    path.resolve(path.join(__dirname, '..', 'jq-releases', file)),
+    process.argv.slice(2),
+    { stdio: ['inherit'] }
 );
+
+jq.stdout.on('data', function (data) { process.stdout.write(data.toString()); });
+jq.stderr.on('data', function (data) { process.stderr.write(data.toString()); });
+jq.on('exit', function (code) { process.exit(code); });
