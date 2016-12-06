@@ -5,11 +5,10 @@
   "author": "James Young <jmeyoung@gmail.com> (http://jamsyoung.com/)",
   "main": "",
   "bin": {
-    "jq": "./jq-releases/jq"
+    "jq": "./bin/jq.js"
   },
   "scripts": {
-    "generate-changelog": "changelog-maker --group",
-    "preinstall": "bash ./scripts/link-proper-binary.sh"
+    "generate-changelog": "changelog-maker --group"
   },
   "repository": {
     "type": "git",
